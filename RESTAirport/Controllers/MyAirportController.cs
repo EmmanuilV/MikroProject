@@ -1,63 +1,62 @@
-// using System;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Threading.Tasks;
-// using Microsoft.AspNetCore.Mvc;
-// //using MyAirport.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using MyAirport.Models;
 
-// namespace MyAirport.Controllers
-// {
-//     [Route("api/[controller]")]
-//     [ApiController]
-//     public class MyAirportController : ControllerBase
-//     {
-//         public MyAirportController()
-//         {
-//         }
+namespace MyAirport.Controllers
+{
+    [Route("api/airports")]
+    [ApiController]
+    public class MyAirportController : ControllerBase
+    {
+        private MyAirportService airportService;
+        public MyAirportController(MyAirportService service1)
+        {
+            this.airportService = service1;
+        }
 
-//         [HttpGet("")]
-//         public async Task<ActionResult<IEnumerable<TModel>>> GetTModels()
-//         {
-//             // TODO: Your code here
-//             await Task.Yield();
+        [HttpGet]
+        public List<Airport> GetFlights()
+        {
+            return airportService.GetAllAirports();
+        }
 
-//             return new List<TModel> { };
-//         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Flight>> GetFlightById(int id)
+        {
+            // TODO: Your code here
+            await Task.Yield();
 
-//         [HttpGet("{id}")]
-//         public async Task<ActionResult<TModel>> GetTModelById(int id)
-//         {
-//             // TODO: Your code here
-//             await Task.Yield();
+            return null;
+        }
 
-//             return null;
-//         }
+        [HttpPost("")]
+        public async Task<ActionResult<Flight>> PostFlight(Flight model)
+        {
+            // TODO: Your code here
+            await Task.Yield();
 
-//         [HttpPost("")]
-//         public async Task<ActionResult<TModel>> PostTModel(TModel model)
-//         {
-//             // TODO: Your code here
-//             await Task.Yield();
+            return null;
+        }
 
-//             return null;
-//         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutFlight(int id, Flight model)
+        {
+            // TODO: Your code here
+            await Task.Yield();
 
-//         [HttpPut("{id}")]
-//         public async Task<IActionResult> PutTModel(int id, TModel model)
-//         {
-//             // TODO: Your code here
-//             await Task.Yield();
+            return NoContent();
+        }
 
-//             return NoContent();
-//         }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Flight>> DeleteFlightById(int id)
+        {
+            // TODO: Your code here
+            await Task.Yield();
 
-//         [HttpDelete("{id}")]
-//         public async Task<ActionResult<TModel>> DeleteTModelById(int id)
-//         {
-//             // TODO: Your code here
-//             await Task.Yield();
-
-//             return null;
-//         }
-//     }
-// }
+            return null;
+        }
+    }
+}
