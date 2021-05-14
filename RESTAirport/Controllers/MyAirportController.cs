@@ -8,7 +8,6 @@ using MyAirport.Models;
 namespace MyAirport.Controllers
 {
     [Route("api/airports")]
-    [ApiController]
     public class MyAirportController : ControllerBase
     {
         private MyAirportService airportService;
@@ -23,13 +22,10 @@ namespace MyAirport.Controllers
             return airportService.GetAllAirports();
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Flight>> GetFlightById(int id)
+        [HttpGet("flight/{depCode}/{arrCode}/{date}")]
+        public Flight GetFlightById(Airport depCode, Airport arrCode, DateTime date)
         {
-            // TODO: Your code here
-            await Task.Yield();
-
-            return null;
+            return airportService.GetFlight(depCode.Code, arrCode.Code, date);
         }
 
         [HttpPost("")]

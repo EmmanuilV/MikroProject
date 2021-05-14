@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyAirport.Models;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyAirport.Migrations
 {
     [DbContext(typeof(MyAirportContext))]
-    partial class MyAirportContextModelSnapshot : ModelSnapshot
+    [Migration("20210514130042_CodeForAirports")]
+    partial class CodeForAirports
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,17 +45,25 @@ namespace MyAirport.Migrations
                         .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("ArrivalCode")
+                    b.Property<string>("ArrivalCode1")
                         .HasColumnType("text")
-                        .HasColumnName("arrival_code");
+                        .HasColumnName("arrival_code1");
+
+                    b.Property<string>("ArrivalCodeCode")
+                        .HasColumnType("text")
+                        .HasColumnName("arrival_code_code");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("date");
 
-                    b.Property<string>("DepartureCode")
+                    b.Property<string>("DepartureCode1")
                         .HasColumnType("text")
-                        .HasColumnName("departure_code");
+                        .HasColumnName("departure_code1");
+
+                    b.Property<string>("DepartureCodeCode")
+                        .HasColumnType("text")
+                        .HasColumnName("departure_code_code");
 
                     b.Property<int>("PlacesCount")
                         .HasColumnType("integer")
@@ -66,11 +76,17 @@ namespace MyAirport.Migrations
                     b.HasKey("ID")
                         .HasName("pk_flights");
 
-                    b.HasIndex("ArrivalCode")
-                        .HasDatabaseName("ix_flights_arrival_code");
+                    b.HasIndex("ArrivalCode1")
+                        .HasDatabaseName("ix_flights_arrival_code1");
 
-                    b.HasIndex("DepartureCode")
-                        .HasDatabaseName("ix_flights_departure_code");
+                    b.HasIndex("ArrivalCodeCode")
+                        .HasDatabaseName("ix_flights_arrival_code_code");
+
+                    b.HasIndex("DepartureCode1")
+                        .HasDatabaseName("ix_flights_departure_code1");
+
+                    b.HasIndex("DepartureCodeCode")
+                        .HasDatabaseName("ix_flights_departure_code_code");
 
                     b.ToTable("flights");
                 });
@@ -79,17 +95,31 @@ namespace MyAirport.Migrations
                 {
                     b.HasOne("MyAirport.Models.Airport", "Arrival")
                         .WithMany()
-                        .HasForeignKey("ArrivalCode")
-                        .HasConstraintName("fk_flights_airports_arrival_code");
+                        .HasForeignKey("ArrivalCode1")
+                        .HasConstraintName("fk_flights_airports_arrival_code1");
+
+                    b.HasOne("MyAirport.Models.Airport", "ArrivalCode")
+                        .WithMany()
+                        .HasForeignKey("ArrivalCodeCode")
+                        .HasConstraintName("fk_flights_airports_arrival_code_code");
 
                     b.HasOne("MyAirport.Models.Airport", "Departure")
                         .WithMany()
-                        .HasForeignKey("DepartureCode")
-                        .HasConstraintName("fk_flights_airports_departure_code");
+                        .HasForeignKey("DepartureCode1")
+                        .HasConstraintName("fk_flights_airports_departure_code1");
+
+                    b.HasOne("MyAirport.Models.Airport", "DepartureCode")
+                        .WithMany()
+                        .HasForeignKey("DepartureCodeCode")
+                        .HasConstraintName("fk_flights_airports_departure_code_code");
 
                     b.Navigation("Arrival");
 
+                    b.Navigation("ArrivalCode");
+
                     b.Navigation("Departure");
+
+                    b.Navigation("DepartureCode");
                 });
 #pragma warning restore 612, 618
         }

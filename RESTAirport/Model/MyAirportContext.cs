@@ -10,7 +10,10 @@ namespace MyAirport.Models
         public DbSet<Airport> Airports { get; set; }
 
         public MyAirportContext(DbContextOptions<MyAirportContext> options) : base(options) { }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
     }
 }
 

@@ -53,7 +53,7 @@ namespace MyAirport
                     builder.AllowAnyMethod();
                 });
             });
-        }
+           }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -79,7 +79,7 @@ namespace MyAirport
             {
                 endpoints.MapControllers();
             });
-            
+
 
 
         }
