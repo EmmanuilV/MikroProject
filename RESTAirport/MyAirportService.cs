@@ -32,7 +32,8 @@ namespace MyAirport.Models
             {
                 if (dateList.Count == 0)
                 {
-                    dateList.Append(currentFlights[i].Date);
+                    dateList.Add(currentFlights[i].Date);
+                    System.Console.WriteLine("dateList after first append: {0}", dateList.FirstOrDefault());
                 }
                 else
                 {
@@ -40,16 +41,34 @@ namespace MyAirport.Models
                     {
                         if (dateList[0] > currentFlights[i].Date)
                         {
-                            dateList[0] = currentFlights[i].Date;
+                            dateList.RemoveAt(0);
+                            dateList.Append(currentFlights[i].Date);
+                            System.Console.WriteLine("dateList append: {0}", dateList.FirstOrDefault());
+
                         }
                     }
                 }
             }
-            System.Console.WriteLine("Departure.Code: {0}, Arrival.Code: {1}, Date: {2}", currentFlights[0].Departure.Code, currentFlights[0].Arrival.Code, currentFlights[0].Date);
-            System.Console.WriteLine("currentFlights: ",currentFlights[0]);
 
-            Flight flight = currentFlights.FirstOrDefault();
-            
+            Console.WriteLine("Departure.Code: {0}, Arrival.Code: {1}, Date: {2}", currentFlights[0].Departure.Code, currentFlights[0].Arrival.Code, currentFlights[0].Date);
+            // dateList.ForEach(d => Console.WriteLine("dateList: ", d));
+            Console.WriteLine("dateList.FirstOrDefault(): {0}", dateList.FirstOrDefault());
+            Flight flight = new Flight();
+            for (int i = 0; i < currentFlights.Count; i++)
+            {
+                if (currentFlights[i].Date == dateList.FirstOrDefault())
+                {
+                    flight = currentFlights.FirstOrDefault(f => f.Date == dateList.FirstOrDefault());
+                }
+                else
+                {
+                    System.Console.WriteLine("IT'S NOT WORK");
+                }
+
+            }
+            // Flight flight = currentFlights.FirstOrDefault(f => f.Date == dateList.FirstOrDefault());
+            // Console.WriteLine("FLIGHT: {0}", flight);
+
             return flight;
         }
     }

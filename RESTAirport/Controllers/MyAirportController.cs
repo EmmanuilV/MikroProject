@@ -22,7 +22,7 @@ namespace MyAirport.Controllers
             return airportService.GetAllAirports();
         }
 
-        [HttpGet("flight/{depCode}/{arrCode}/{date}")]
+        [HttpGet("flight/{arrCode}/{depCode}/{date}")]
         public Flight GetFlightById(Airport depCode, Airport arrCode, DateTime date)
         {
             return airportService.GetFlight(depCode.Code, arrCode.Code, date);
