@@ -24,7 +24,6 @@ namespace MyAirport.Models
             List<Flight> currentFlights = db.Flights
             .Include(f => f.Arrival)
             .Include(f => f.Departure)
-            // .Where(f => f.Departure.Code == depCode && f.Arrival.Code == arrCode)
             .ToList();
 
             List<DateTime> dateList = new List<DateTime>();
@@ -50,9 +49,6 @@ namespace MyAirport.Models
                 }
             }
 
-            Console.WriteLine("Departure.Code: {0}, Arrival.Code: {1}, Date: {2}", currentFlights[0].Departure.Code, currentFlights[0].Arrival.Code, currentFlights[0].Date);
-            // dateList.ForEach(d => Console.WriteLine("dateList: ", d));
-            Console.WriteLine("dateList.FirstOrDefault(): {0}", dateList.FirstOrDefault());
             Flight flight = new Flight();
             for (int i = 0; i < currentFlights.Count; i++)
             {
@@ -64,13 +60,10 @@ namespace MyAirport.Models
                 {
                     System.Console.WriteLine("IT'S NOT WORK");
                 }
-
             }
-            // Flight flight = currentFlights.FirstOrDefault(f => f.Date == dateList.FirstOrDefault());
-            // Console.WriteLine("FLIGHT: {0}", flight);
-
             return flight;
         }
+        
     }
 }
 
